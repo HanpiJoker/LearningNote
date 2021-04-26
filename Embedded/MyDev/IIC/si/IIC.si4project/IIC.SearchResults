@@ -1,0 +1,5 @@
+---- nand_read Matches (4 in 2 files) ----
+CopyCode2SDRAM in init.c :     extern void nand_read(unsigned char *buf, unsigned long start_addr, int size);
+CopyCode2SDRAM in init.c :     nand_read(buf, start_addr, size);
+nand.c line 47 : void nand_read(unsigned char *buf, unsigned long start_addr, int size);
+nand.c line 347 : void nand_read(unsigned char *buf, unsigned long start_addr, int size)

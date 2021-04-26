@@ -1,0 +1,15 @@
+---- printf Matches (19 in 9 files) ----
+Test_Adc in adc_ts.c :     printf("Measuring the voltage of AIN0 and AIN1, press any key to exit\n\r");
+Test_Adc in adc_ts.c :         printf("AIN0 = %d.%-3dV    AIN1 = %d.%-3dV\r", (int)vol0, t0, (int)vol1, t1);
+Test_Adc in adc_ts.c :     printf("\n");
+Isr_Tc in adc_ts.c :         printf("Stylus Up!!\n\r");
+Isr_Tc in adc_ts.c :         printf("Stylus Down: ");
+Isr_Adc in adc_ts.c :     printf("xdata = %4d, ydata = %4d\r\n", (int)(ADCDAT0 & 0x3ff), (int)(ADCDAT1 & 0x3ff));
+Test_Ts in adc_ts.c :     printf("Touch the screem to test, press any key to exit\n\r");    
+at24c02_read in at24xx.c : 	printf("at24cxx_read address = %d\r\n", address);
+at24c02_read in at24xx.c : 	printf("at24cxx_read send address ok\r\n");
+at24c02_read in at24xx.c : 	printf("at24cxx_read get data ok\r\n");
+I2CIntHandle in i2c.c :     if(iicSt & 0x8){ printf("Bus arbitration failed\n\r"); }
+Dummy_isr in interrupt.c :     printf("Dummy_isr\n\r");
+main in main.c : 	printf ("SPI_Flash: MID = 0x%02x, DID = 0x%02x\n", mid, did);
+main in main.c : 	printf ("SPI_Flash read from 4096: %s \n\r", str);

@@ -1,0 +1,100 @@
+<Linux Base Driver for DM9000/DM9010 adapter in x86 system>
+
+DAVICOM Semiconductor Inc.				05/30/2007
+
+        A Davicom DM9010/DM9000 fast ethernet driver for Linux. 
+        Copyright (C) 1997 2007  Sten Wang ,Jackal Huang
+
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License
+        as published by the Free Software Foundation; either version 2
+        of the License, or (at your option) any later version.
+
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+        
+<A. Requirements>
+
+  kernel source tree (supported versions 2.4.x or 2.6.x)
+  compiler/binutils for kernel compilation
+  
+<B. Building and Installation>
+  
+  B-1: Login as root.
+  
+  B-2: Untar/unzip archive:
+  	tar -zxvf dm9dev9000c.tar.gz
+  	
+  B-3: Change to the directory
+  	cd dm9dev9000c
+  	
+  B-4: Compile the driver module
+  	-Kernel 2.4
+  	  Please according to your system to pick one.
+     	    make     	;;Without SMP support 
+     	    make mod	;;Set version info on all module symbol
+     	    make smp	;;symmetric multi-processing(SMP) support
+     	    make smp_mod	;;SMP & Set version info on module
+	    make checksum	;;Set TX/RX Checksum offload 
+	-Kernel 2.6
+	    make
+  B-5: Install the module:
+       MUST insert mii.ko module into the kernel image
+       -Kernel 2.4
+       insmod dm9dev9000c.o <parameter>=<value>
+       -Kernel 2.6
+       insmod dm9dev9000c.ko <parameter>=<value>
+
+  B-6: Assign an IP address to the interface by entering the following, 
+       where x is the interface number:
+     	 ifconfig ethx <IP_address>
+
+  B-7: Verify that the interface works. Enter the following, where 
+       <IP_address> is the IP address for another machine on the 
+       same subnet as the interface that is being tested:
+            ping  <IP_address>
+            
+	
+  <C. The parameters of installing module>
+  If the driver is built as a module, the following optional parameters are 
+  used by entering them on the command line with the modprobe or insmod command
+  using this syntax:
+     insmod dm9dev9000c.[k]o [<parameter>=<VAL1>,<VAL2>,...] 
+
+  The default value for each parameter is generally the recommended setting,
+  unless otherwise noted.
+  
+  C-1: Intro parameters 
+  
+  - irq (IRQ number)
+    default value :3
+    ex.
+    	insmod irq=5 	;;inster module with irq number=5
+    
+  - iobase (I/O base adddress)
+    default value: the program will reach from 0x300 to 0x370 automatically.
+    ex.
+    	insmod iobase=0x310 ;;inster module with I/O base address=0x310
+    	
+  - mode (Media Speed)
+    default value: Auto Detection
+    ex.
+    	insmod dm9dev9000c.o           ;;Auto Detection Mode
+        insmod dm9dev9000c.o mode=0    ;;Force 10M Half Duplex
+        insmod dm9dev9000c.o mode=1    ;;Force 100M Half Duplex
+        insmod dm9dev9000c.o mode=4    ;;Force 10M Full Duplex
+        insmod dm9dev9000c.o mode=5    ;;Force 100M Full Duplex
+        
+   C-2: For Redhat, You can use the following to Activate NIC
+	
+	1.  login as root.
+	2.  copy dm9dev9000c.[k]o into /lib/modules/2.4.x[2.6.x]/kernel/drivers/net/
+	3.  add the new line with "alias ethx dm9dev9000c" in "/etc/module.conf". 
+	4.  execute "netconfig -d ethx".
+	5.  Fill your IP address, netmask and gateway
+	6.  press <ok> to confirm and exit this setting
+	7   reboot
+	
+DAVICOM Web-Site: www.davicom.com.tw
